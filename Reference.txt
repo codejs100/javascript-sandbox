@@ -1,0 +1,134 @@
+var, let, const
+****************
+Variables includes only letters, numbers, _ , $
+Variables cannot start with number
+
+Setting value with const
+    1. Always need to assign a value
+    2. Assigned value can't be changed. Values can't be reassigned.
+Note:- const object and array value can be changed but it can't be reassigned.
+
+const aRR = [1,2,3,4,5];
+aRR.push(6) // Possible to add values
+aRR = [1,2,3] // not possible
+
+Datatypes
+*********
+
+Primitive Datatype
+    Stored directly in the location the variable accesses
+    Stored on the stack
+    1. String
+    2. number
+    3. Boolean
+    4. null
+    5. undefined
+    6. symbols
+
+Reference Datatype
+    Accessesed by reference.
+    Object that are stored in the heap.
+    A pointer to the location in the memory.
+    1. Array
+    2. Object literal
+    4. functions
+    5. Dates
+    6. Anything else
+
+typeof <variable> -> To know the type of the variable
+
+Type Conversion -> To change one Datatype to another
+    1. Number to String
+        let num = String(10); or (10).toString()
+    2. Boolean to String
+        let bool = String(true); 
+    3. Date to String
+        let dat = String(new Date());
+    4. Array to String
+        let arr = String([1,2,3]);
+-- toString() is also used to convert a datatype to  string.
+    5. String to Number
+        let val = Number('5');
+        let val = Number('hello'); // NaN
+    6. Boolean to Number
+        let bool = Number(true); // 1
+        let bool = Number(false); // 0
+    7. null to Number
+        let val = Number(null); //0
+-- parseInt('100') to convert to integer
+-- parseFloat('100.00') to convert to floating point
+-- Type cohersion -> JS automatically convert type of variable
+        for eg: let val = 4 + '5'; //45 [String]
+
+Math -> Object has properties and method
+Math.Pi
+Math.round(2.8); // 3
+Math.ciel(2.8); // 2
+Math.floor(2.8); //3
+Math.sqrt(64); //8
+Math.pow(8,2); //64
+Math.abs(-3); //3
+Math.min(2,1,3) //1
+Math.max(2,1,3) //3
+Math.random() // generate number between 0 and 1;
+Math.floor(Math.random()*20 + 1) // generate a random number between 1 and 20
+
+Array
+*****
+
+Array.isArray(<varName>) -> check whether variable is an array.
+
+Sorting number array
+    - arr.sort(function(x,y){ return x-y; });
+
+Find a value in the array
+    - arr.find(functon(num){
+        return num>50; // returns first number greater than 50 in the array.
+
+Check variable is defined or not
+-------------------------------
+
+if(typeof varName == 'undefined') {
+    console.log('Variable is not defined');
+}
+
+Looping Array
+-------------
+1. forEach
+
+arrMain.forEach(function(current){
+    console.log(current);
+});
+-- for each take 3 paremeters value, index, whole array
+arrMain.forEach(function(value, index, array){
+    // value - element of array
+    // index - index of array
+    // array - whole array (arrMain)
+});
+
+2. map
+newArr = arrMain.map(function(current){
+    return current;
+})
+
+3. for..in
+for(var key in obj) {
+    // key - key of object
+    // obj[key] - value of key
+}
+
+Dom Selectors
+-------------
+1. Single Selector
+    a. document.getElementById('')
+    b. document.querySelector('')
+
+2. Select morethan one element
+    a. document.getElementsByClassName('')
+    b. document.getElementByTagName('')
+    c. document.querySelectorAll('') // Returns node list which include textnodes other than element. NodeList includes array method like forEach
+
+
+Convet elementList to an array
+    newArray = Array.from(elementList)
+
