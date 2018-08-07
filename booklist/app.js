@@ -33,7 +33,7 @@ UI.prototype.addItem = function(book) {
     const delete_link = document.createElement('a');
     delete_link.setAttribute('href','#');
     delete_link.addEventListener('click', function() {
-        console.log('From the event Listener');
+        this.parentElement.parentElement.remove();
     });
     const delete_text = document.createTextNode('x');
     delete_link.appendChild(delete_text);
