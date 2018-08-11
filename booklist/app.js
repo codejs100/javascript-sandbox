@@ -32,8 +32,11 @@ UI.prototype.addItem = function(book) {
     const column_delete = document.createElement('td');
     const delete_link = document.createElement('a');
     delete_link.setAttribute('href','#');
-    delete_link.addEventListener('click', function() {
-        this.parentElement.parentElement.remove();
+    delete_link.addEventListener('click', function(e) {
+        const ui = new UI();
+        ui.deleteBook(this);
+        ui.showAlert('Deleted Successfully', 'success');
+        e.preventDefault();
     });
     const delete_text = document.createTextNode('x');
     delete_link.appendChild(delete_text);
@@ -41,13 +44,13 @@ UI.prototype.addItem = function(book) {
     row.appendChild(column_delete);
 
     tbody.appendChild(row);
-}
+};
 
 UI.prototype.resetFields = function() {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
     document.querySelector('#isbn').value = '';
-}
+};
 
 // Add Event Listener
 document.querySelector('#book-form').addEventListener('submit', function(e) {
@@ -58,7 +61,28 @@ document.querySelector('#book-form').addEventListener('submit', function(e) {
     const book = new Book(title, author, isbn);
 
     const ui = new UI();
-    ui.addItem(book);
-    ui.resetFields()
+    if(title === '' || author === '' || isbn === '') {
+        ui.showAlert('Please fill the form', 'error');
+    } else {
+        ui.addItem(book);
+        ui.resetFields()
+        ui.showAlert('Added Successfully', 'success');
+    }
     e.preventDefault();
-})
+});
+
+UI.prototype.showAlert = function(message, errClass) {
+    const div = document.createElement('div');
+    div.className = `alert ${errClass}`;
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector('.container');
+    const form = document.querySelector('#book-form');
+    container.insertBefore(div, form);
+    setTimeout(function() {
+        document.querySelector('.alert').remove();
+    }, 3000);
+};
+
+UI.prototype.deleteBook = function(target) {
+    target.parentElement.parentElement.remove();
+}
